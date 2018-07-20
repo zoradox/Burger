@@ -4,27 +4,24 @@
   <div class="container">
     <div class="burger-before">
       <div class="col s6">
-        {{#each burgers}}
-          {{#unless this.devoured}}
-            <div>
-              <form action="/burgers/{{this.id}}?_method=PUT" method="POST">
-                <button type="submit" class='burgerAvailable'> {{this.burger_name}}</button>
-              </form>
-            </div>
-          {{/unless}}
-        {{/each}}
+        {{#each burgersNotDevoured}} {{#unless this.devoured}}
+        <div>
+          <form action="/burgers/{{this.id}}?_method=PUT" method="POST">
+            {{indexing @index}}.
+            <button type="submit" class='burgerAvailable'> {{this.burger_name}} (Click to Consume)</button>
+          </form>
+        </div>
+        {{/unless}} {{/each}}
       </div>
 
       <div class="burger-after">
-        {{#each burgers}}
-          {{#if this.devoured}}
-            <div class='burgerEaten'>
-              <div>
-                {{this.burger_name}}
-              </div>
-            </div>
-          {{/if}}
-        {{/each}}
+        {{#each burgersDevoured}} {{#if this.devoured}}
+        <div class='burgerEaten'>
+          <div>
+            {{indexing @index}}. {{this.burger_name}}
+          </div>
+        </div>
+        {{/if}} {{/each}}
       </div>
     </div>
   </div>
@@ -36,6 +33,10 @@
       <input type="text" id="name" name="burger_name" placeholder="">
       <button type="submit" class="addBurgerButton">Submit</button>
     </form>
-    <h5>"Enter a burger you want to eat and hit the submit button"<h5>
+    <h5>"Enter a burger you want to eat and hit the submit button"
+      <h5>
+  </div>
+  <div>
+    <a href="https://github.com/zoradox/burger">Github Source</a>
   </div>
 </div>

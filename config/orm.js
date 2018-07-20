@@ -30,9 +30,18 @@ var orm = {
       if (err) {
         throw err;
       }
-      cb(result);
+      const results = {
+        devoured: result.filter(function(burger) {
+          return burger.devoured === 1;
+        }),
+        notDevoured: result.filter(function(burger) {
+          return burger.devoured === 0;
+        }),
+        all: result
+      };
+      cb(results);
     });
-},
+  },
   insertOne: function(table, cols, vals, cb) {
     var queryString = "INSERT INTO " + table;
 
@@ -67,7 +76,7 @@ var orm = {
       }
       cb(result);
     });
-  },
+  }
 };
 
 module.exports = orm;

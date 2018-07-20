@@ -16,7 +16,17 @@ var exphbs = require("express-handlebars");
 
 //Handlebars
 app.use(methodOverride("_method"));
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine(
+  "handlebars",
+  exphbs({
+    defaultLayout: "main",
+    helpers: {
+      indexing: function(index) {
+        return index + 1;
+      }
+    }
+  })
+);
 app.set("view engine", "handlebars");
 
 //Import routes
@@ -28,5 +38,3 @@ app.listen(PORT, function() {
   // Log (server-side) when our server has started
   console.log("Server listening on: http://localhost:" + PORT);
 });
-
-
